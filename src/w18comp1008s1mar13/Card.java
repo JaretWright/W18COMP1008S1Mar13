@@ -1,5 +1,7 @@
 package w18comp1008s1mar13;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author JWright
@@ -7,6 +9,7 @@ package w18comp1008s1mar13;
 public class Card {
     private String faceName, suit;
     private int faceValue; //aces will be high
+    private Image cardImage;
     
     /**
      * Here is our constructor.  Note no return type
@@ -16,6 +19,30 @@ public class Card {
         setFaceName(faceName);
         setSuit(suit);
         setFaceValue(value);
+        setCardImage(new Image(getImageFileName()));
+    }
+
+    public Image getCardImage()
+    {
+        return cardImage;
+    }
+
+    public void setCardImage(Image cardImage)
+    {
+        this.cardImage = cardImage;
+    }
+    
+    
+    
+    /**
+     * This method will return a String with the file name
+     * of the card
+     * @return 
+     */
+    public String getImageFileName()
+    {
+        return String.format("/images/%s_of_%s.png", getFaceName(),
+                                                           getSuit());
     }
 
     public String getFaceName() {
