@@ -19,10 +19,13 @@ public class CardViewController implements Initializable
     @FXML    private TextField faceNameTextField;
     @FXML    private TextField suitTextField;
     @FXML    private TextField faceValueTextField;
-
+             private Card activeCard;
+             private CardDeck deck;
+             
     @FXML
-    void dealCardButtonPushed(ActionEvent event) {
-
+    public void dealCardButtonPushed(ActionEvent event) {
+        activeCard = deck.dealTopCard();
+        updateView();
     }
 
     /**
@@ -31,13 +34,17 @@ public class CardViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        CardDeck deck = new CardDeck();
-        Card card = deck.dealTopCard();
-        
-        this.faceNameTextField.setText(card.getFaceName());
-        this.faceValueTextField.setText(Integer.toString(card.getFaceValue()));
-        this.suitTextField.setText(card.getSuit());
-        this.imageView.setImage(card.getCardImage());
+        deck = new CardDeck();
+        deck.shuffle();
+        activeCard = deck.dealTopCard();
+        updateView();
     }    
     
+    public void updateView()
+    {
+        this.faceNameTextField.setText(activeCard.getFaceName());
+        this.faceValueTextField.setText(Integer.toString(activeCard.getFaceValue()));
+        this.suitTextField.setText(activeCard.getSuit());
+        this.imageView.setImage(activeCard.getCardImage());
+    }
 }

@@ -21,6 +21,7 @@ public class Launch extends Application
        Parent parent  = loader.load();
        
        Scene scene = new Scene(parent);
+       primaryStage.setTitle("Super awesome card viewer thingy");
        primaryStage.setScene(scene);
        primaryStage.show();
     }
